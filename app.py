@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 from config import Config
@@ -19,6 +19,7 @@ def create_app():
     from routes.matchmaking import matchmaking_bp
     from routes.notifications import notifications_bp
     from routes.websocket import ws_bp
+    from routes.storage import storage_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(challenges_bp, url_prefix='/api/challenges')
@@ -26,6 +27,7 @@ def create_app():
     app.register_blueprint(matchmaking_bp, url_prefix='/api/matchmaking')
     app.register_blueprint(notifications_bp, url_prefix='/api/notifications')
     app.register_blueprint(ws_bp, url_prefix='/api/ws')
+    app.register_blueprint(storage_bp, url_prefix='/api/storage')
     
     @app.route('/api/health')
     def health():
